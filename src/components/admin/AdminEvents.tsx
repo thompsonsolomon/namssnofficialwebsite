@@ -235,8 +235,8 @@ export default function AdminEvents() {
   const handleEdit = (event: Event) => {
     setFormData({
       ...event,
-      startDate: new Date(event.startDate).toISOString(),
-      endDate: new Date(event.endDate).toISOString(),
+      startDate: new Date(event.startDate).toString(),
+      endDate: new Date(event.endDate).toString(),
       host: event.host || { name: '', role: '', image: '' },
       speakers: event.speakers || [],
     } as any)

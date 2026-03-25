@@ -242,7 +242,7 @@ export default function EventDetail() {
                   <p className="font-semibold text-foreground">{event.location}</p>
                 </div>
               </div>
-              {event.capacity && (
+              {event && (
                 <div className="flex items-start gap-3">
                   <Users className="text-primary mt-1" size={20} />
                   <div>
@@ -410,9 +410,9 @@ export default function EventDetail() {
               >
                 {formSubmitting ? 'Registering...' : 'Register Now'}
               </button>
-              {event.capacity && event.registeredCount >= event.capacity && (
+              {/* {event.capacity && event.registeredCount >= event.capacity && (
                 <p className="text-sm text-error text-center">Event is at full capacity</p>
-              )}
+              )} */}
             </form>
           </div>
         </div>
