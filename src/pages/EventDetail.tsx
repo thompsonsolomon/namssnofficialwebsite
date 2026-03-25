@@ -9,11 +9,12 @@ import {
   updateDoc,
   increment,
   Timestamp,
+  doc,
 } from 'firebase/firestore'
-import { db } from '@/config/firebase'
-import { Event } from '@/types'
-import { formatDate, formatDateTime, getEventStatus } from '@/utils'
-import { validateEmail, validatePhone } from '@/utils'
+import { db } from '../config/firebase'
+import { Event } from '../types'
+import { formatDate, formatDateTime, getEventStatus } from '../utils'
+import { validateEmail, validatePhone } from '../utils'
 import toast from 'react-hot-toast'
 import { Loader, ArrowLeft, Calendar, MapPin, Users, Clock } from 'lucide-react'
 
@@ -267,13 +268,65 @@ export default function EventDetail() {
       </div>
 
       <div className="container-custom max-w-4xl grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
-        {/* Event Details */}
-        <div className="lg:col-span-2">
-          <div className="card p-8">
-            <h2 className="text-2xl font-bold text-foreground mb-4">About This Event</h2>
-            <p className="text-muted-foreground leading-relaxed whitespace-pre-wrap">{event.description}</p>
-          </div>
+      {/* Event Details */}
+<div className="lg:col-span-2 space-y-6">
+
+  {/* About */}
+  <div className="card p-8">
+    <h2 className="text-2xl font-bold text-foreground mb-4">About This Event</h2>
+    <p className="text-muted-foreground leading-relaxed whitespace-pre-wrap">
+      {event.description}
+    </p>
+  </div>
+
+  {/* Host */}
+  {event.host && (
+    <div className="card p-6">
+      <h3 className="text-xl font-semibold text-foreground mb-4">Event Host</h3>
+
+      <div className="flex items-center gap-4">
+        <img
+          src={event.host.image}
+          alt={event.host.name}
+          className="w-14 h-14 rounded-full object-cover border"
+        />
+
+        <div>
+          <p className="font-semibold text-foreground">{event.host.name}</p>
+          <p className="text-sm text-muted-foreground">{event.host.role}</p>
         </div>
+      </div>
+    </div>
+  )}
+
+  {/* Speakers */}
+  {event.speakers && event.speakers.length > 0 && (
+    <div className="card p-6">
+      <h3 className="text-xl font-semibold text-foreground mb-6">Speakers</h3>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        {event.speakers.map((speaker: any, index: number) => (
+          <div
+            key={index}
+            className="flex items-center gap-4 p-4 border border-border rounded-lg hover:bg-muted transition"
+          >
+            <img
+              src={speaker.image}
+              alt={speaker.name}
+              className="w-12 h-12 rounded-full object-cover border"
+            />
+
+            <div>
+              <p className="font-semibold text-foreground">{speaker.name}</p>
+              <p className="text-sm text-muted-foreground">{speaker.role}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )}
+
+</div>
 
         {/* Registration Form */}
         <div className="lg:col-span-1">
@@ -326,10 +379,10 @@ export default function EventDetail() {
                   required
                 >
                   <option value="">Select department</option>
-                  <option value="Engineering">Engineering</option>
-                  <option value="Business">Business</option>
-                  <option value="Arts">Arts</option>
-                  <option value="Sciences">Sciences</option>
+                  <option value="Mathematics Science">Mathematics Science</option>
+                  <option value="Mathematics Education">Mathematics Education </option>
+                  <option value="Statistics">Statistics</option>
+                  <option value="Data Science">Data Science</option>
                   <option value="Other">Other</option>
                 </select>
               </div>
@@ -343,11 +396,11 @@ export default function EventDetail() {
                   required
                 >
                   <option value="">Select level</option>
-                  <option value="Freshman">Freshman</option>
-                  <option value="Sophomore">Sophomore</option>
-                  <option value="Junior">Junior</option>
-                  <option value="Senior">Senior</option>
-                  <option value="Graduate">Graduate</option>
+                  <option value="100">100</option>
+                  <option value="200">200</option>
+                  <option value="300">300</option>
+                  <option value="400">400</option>
+                  <option value="Staff/Graduate">Staff/Graduate</option>
                 </select>
               </div>
               <button

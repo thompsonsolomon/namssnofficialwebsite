@@ -12,9 +12,9 @@ export default function Admin() {
   const { user, isAdmin } = useAuth()
   const [activeTab, setActiveTab] = useState<'overview' | 'staff' | 'events' | 'announcements' | 'books' | 'cards'>('overview')
 
-  if (!isAdmin) {
-    return <Navigate to="/" />
-  }
+  // if (!isAdmin) {
+  //   return <Navigate to="/" />
+  // }
 
   const tabs = [
     { id: 'overview', label: 'Overview', icon: LayoutDashboard },

@@ -1,3 +1,9 @@
+export interface Person {
+  name: string
+  role: string
+  image: string
+}
+
 // User Types
 export interface User {
   id: string
@@ -66,6 +72,9 @@ export interface Event {
   status: EventStatus
   createdAt: Date
   updatedAt: Date
+ // ✅ NEW FIELDS
+  host?: Person
+  speakers?: Person[]
 }
 
 export interface EventRegistration {

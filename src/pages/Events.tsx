@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { collection, query, getDocs, orderBy } from 'firebase/firestore'
-import { db } from '@/config/firebase'
-import { Event } from '@/types'
-import { formatDate, getEventStatus } from '@/utils'
+import { db } from '../config/firebase'
+import { Event } from '../types'
+import { formatDate, getEventStatus } from '../utils'
 import toast from 'react-hot-toast'
 import { Loader, Calendar, MapPin, Users } from 'lucide-react'
 

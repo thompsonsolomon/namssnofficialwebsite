@@ -16,7 +16,7 @@ export default function Layout() {
   const navLinks = [
     { label: 'Home', path: '/' },
     { label: 'About', path: '/about' },
-    { label: 'Blog', path: '/blog' },
+    // { label: 'Blog', path: '/blog' },
     { label: 'Events', path: '/events' },
     { label: 'Announcements', path: '/announcements' },
     { label: 'Books', path: '/books' },

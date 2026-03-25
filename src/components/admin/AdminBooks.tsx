@@ -10,9 +10,9 @@ import {
   orderBy,
   Timestamp,
 } from 'firebase/firestore'
-import { db } from '@/config/firebase'
-import { uploadToCloudinary } from '@/config/cloudinary'
-import { Book } from '@/types'
+import { db } from '../../config/firebase'
+import { uploadToCloudinary, uploadToUploadcare } from '../../config/cloudinary'
+import { Book } from '../../types'
 import toast from 'react-hot-toast'
 import { Edit, Trash2, Plus, Loader, Upload, X } from 'lucide-react'
 
@@ -74,7 +74,7 @@ export default function AdminBooks() {
 
     setUploading(true)
     try {
-      const fileUrl = await uploadToCloudinary(file)
+      const fileUrl = await uploadToUploadcare(file)
       setFormData(prev => ({ ...prev, fileUrl }))
       toast.success('File uploaded!')
     } catch (error) {
