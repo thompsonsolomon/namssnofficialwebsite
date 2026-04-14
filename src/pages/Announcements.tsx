@@ -20,6 +20,7 @@ export default function Announcements() {
         )
         const snapshot = await getDocs(announcementsQuery)
         
+        console.log('Fetched announcements:', snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })))
         const now = new Date()
         const filtered = snapshot.docs
           .map(doc => ({ id: doc.id, ...doc.data() } as Announcement))

@@ -214,7 +214,7 @@ export default function AdminStaff() {
                 >
                   <option value="advisor">Advisor</option>
                   <option value="president">President</option>
-                  <option value="deputy">Deputy</option>
+                  <option value="HOD">HOD</option>
                   <option value="secretary">Secretary</option>
                   <option value="treasurer">Treasurer</option>
                   <option value="member">Member</option>
