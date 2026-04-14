@@ -46,14 +46,14 @@ export default function Home() {
       {/* Hero Banner */}
       <div className="relative h-96 md:h-[500px] bg-gradient-to-r from-primary to-secondary overflow-hidden">
         <img
-          src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&h=500&fit=crop"
+          src="/hero.jpeg"
           alt="Department Banner"
           className="w-full h-full object-cover opacity-40"
         />
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center text-white px-4">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Welcome to Our Department</h1>
-            <p className="text-lg md:text-xl text-white/90">Excellence in education and innovation</p>
+            <p className="text-lg md:text-xl text-white/90">Creative Thinkers, Problem Solvers </p>
           </div>
         </div>
       </div>

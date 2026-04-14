@@ -68,13 +68,21 @@ export default function About() {
           <div>
             <h2 className="text-3xl font-bold text-foreground mb-4">Our History</h2>
             <p className="text-muted-foreground mb-4 leading-relaxed">
-              Founded in 1995, our department has been a beacon of academic excellence for nearly three decades. 
-              What started as a small program with just a handful of students has grown into a thriving center 
-              of learning with hundreds of alumni making impacts worldwide.
+            The Department of Mathematics is one of the seven (7) Departments established in the Faculty of Science of the University at inception in September 2011 with eleven (11) students who were admitted through UTME and Post-UTME.
+Our mission is to offer qualitative research and teaching by constantly introducing new courses and options since Mathematics as well as other pure scientific endeavours underpin technology.
+
+
+
+ 
             </p>
-            <p className="text-muted-foreground leading-relaxed">
-              We've continually evolved with the times, adapting our programs to meet industry demands while 
-              maintaining our core values of integrity, excellence, and community engagement.
+            <p className="text-muted-foreground leading-relaxed mb-4">
+           The program also aims at bringing together the ingredients necessary for a well-paid career as required in the industries and other areas of the national economy aswell as relevant government establishments. Opportunities for the attainment of academic excellence through effective teaching and research in all aspects of AppliedMathematics are also provided.
+The prominent feature of our program is the exposure of all intending B.Sc. Mathematics graduate to compulsory and elective courses in all areas of Mathematics and Statistics as well as other Science courses.
+            </p>
+
+              <p className="text-muted-foreground leading-relaxed">
+       This is to ensure a high level of competence of our graduates and to increase their flexibility in fitting into diversecareers and industries. 
+The Academic Programme is designedand/structured in line with the Nigerian University Commission (NUC) specification.
             </p>
           </div>
         </div>

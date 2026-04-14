@@ -17,9 +17,365 @@ import { Event } from '../../types'
 import { formatDate, slugify, getEventStatus } from '../../utils'
 import toast from 'react-hot-toast'
 import { Edit, Trash2, Plus, Loader, Upload, X } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 export default function AdminEvents() {
-  const [events, setEvents] = useState<Event[]>([])
+  // const [events, setEvents] = useState<Event[]>([])
+  // const [loading, setLoading] = useState(true)
+  // const [showForm, setShowForm] = useState(false)
+  // const [editingId, setEditingId] = useState<string | null>(null)
+  // const [uploading, setUploading] = useState(false)
+  // const [imagePreview, setImagePreview] = useState<string | null>(null)
+
+  // const [registrations, setRegistrations] = useState<any[]>([])
+  // const [filteredRegistrations, setFilteredRegistrations] = useState<any[]>([])
+  // const [loadingRegistrations, setLoadingRegistrations] = useState(false)
+  // const [selectedEvent, setSelectedEvent] = useState<Event | null>(null)
+  // const [search, setSearch] = useState('')
+
+  // const [formData, setFormData] = useState({
+  //   title: '',
+  //   slug: '',
+  //   description: '',
+  //   location: '',
+  //   startDate: '',
+  //   endDate: '',
+  //   image: '',
+  //   category: '',
+  //   capacity: 0,
+
+  //   host: {
+  //     name: '',
+  //     role: '',
+  //     image: '',
+  //   },
+
+  //   speakers: [] as {
+  //     name: string
+  //     role: string
+  //     image: string
+  //   }[],
+  // })
+
+  // useEffect(() => {
+  //   fetchEvents()
+  // }, [])
+
+  // useEffect(() => {
+  //   if (!search) {
+  //     setFilteredRegistrations(registrations)
+  //   } else {
+  //     const filtered = registrations.filter(user =>
+  //       user.name?.toLowerCase().includes(search.toLowerCase()) ||
+  //       user.email?.toLowerCase().includes(search.toLowerCase()) ||
+  //       user.department?.toLowerCase().includes(search.toLowerCase())
+  //     )
+  //     setFilteredRegistrations(filtered)
+  //   }
+  // }, [search, registrations])
+
+  // // ================= FETCH =================
+  // const fetchEvents = async () => {
+  //   try {
+  //     const eventsQuery = query(collection(db, 'events'), orderBy('startDate', 'asc'))
+  //     const regQuery = query(collection(db, 'event_registrations'))
+
+  //     const snapshot = await getDocs(eventsQuery)
+  //     const regSnapshot = await getDocs(regQuery)
+
+  //     const eventsList = snapshot.docs.map(doc => {
+  //       const data = doc.data() as any
+  //       return {
+  //         id: doc.id,
+  //         ...data,
+  //         status: getEventStatus(data.startDate, data.endDate),
+  //       } as Event
+  //     })
+
+  //     regSnapshot.docs.forEach(regDoc => {
+  //       const regData = regDoc.data()
+  //       const index = eventsList.findIndex(e => e.id === regData.eventId)
+  //       if (index !== -1) {
+  //         eventsList[index].registeredCount =
+  //           (eventsList[index].registeredCount || 0) + 1
+  //       }
+  //     })
+
+  //     setEvents(eventsList)
+  //   } catch {
+  //     toast.error('Failed to load events')
+  //   } finally {
+  //     setLoading(false)
+  //   }
+  // }
+
+  // const fetchRegistrations = async (eventId: string) => {
+  //   setLoadingRegistrations(true)
+  //   try {
+  //     const q = query(
+  //       collection(db, 'event_registrations'),
+  //       where('eventId', '==', eventId)
+  //     )
+
+  //     const snap = await getDocs(q)
+  //     const data = snap.docs.map(doc => doc.data())
+  //     console.log(data)
+  //     setRegistrations(data)
+  //     setFilteredRegistrations(data)
+  //   } catch {
+  //     toast.error('Failed to load registrations')
+  //   } finally {
+  //     setLoadingRegistrations(false)
+  //   }
+  // }
+
+  // // ================= IMAGE UPLOAD (ONE FUNCTION) =================
+  // const handleImageUpload = async (
+  //   file: File,
+  //   type: 'event' | 'host' | 'speaker',
+  //   index?: number
+  // ) => {
+  //   if (!file) return
+
+  //   setUploading(true)
+  //   try {
+  //     const url = await uploadToCloudinary(file)
+
+  //     if (type === 'event') {
+  //       setFormData(prev => ({ ...prev, image: url }))
+  //       setImagePreview(url)
+  //     }
+
+  //     if (type === 'host') {
+  //       setFormData(prev => ({
+  //         ...prev,
+  //         host: { ...prev.host, image: url },
+  //       }))
+  //     }
+
+  //     if (type === 'speaker' && index !== undefined) {
+  //       const updated = [...formData.speakers]
+  //       updated[index].image = url
+
+  //       setFormData(prev => ({
+  //         ...prev,
+  //         speakers: updated,
+  //       }))
+  //     }
+
+  //     toast.success('Image uploaded!')
+  //   } catch {
+  //     toast.error('Upload failed')
+  //   } finally {
+  //     setUploading(false)
+  //   }
+  // }
+
+  // // ================= FORM =================
+  // const handleInputChange = (e: any) => {
+  //   const { name, value } = e.target
+
+  //   if (name === 'title') {
+  //     setFormData(prev => ({
+  //       ...prev,
+  //       title: value,
+  //       slug: slugify(value),
+  //     }))
+  //   } else if (name === 'capacity') {
+  //     setFormData(prev => ({ ...prev, capacity: parseInt(value) || 0 }))
+  //   } else {
+  //     setFormData(prev => ({ ...prev, [name]: value }))
+  //   }
+  // }
+
+  // const handleSubmit = async (e: any) => {
+  //   e.preventDefault()
+
+  //   if (!formData.title || !formData.description || !formData.location) {
+  //     return toast.error('Fill all required fields')
+  //   }
+
+  //   if (new Date(formData.startDate) >= new Date(formData.endDate)) {
+  //     return toast.error('Invalid date range')
+  //   }
+
+  //   try {
+  //     const eventData = {
+  //       ...formData,
+  //       slug: formData.slug || slugify(formData.title),
+  //       startDate: Timestamp.fromDate(new Date(formData.startDate)),
+  //       endDate: Timestamp.fromDate(new Date(formData.endDate)),
+  //       registeredCount:
+  //         editingId
+  //           ? events.find(e => e.id === editingId)?.registeredCount || 0
+  //           : 0,
+  //     }
+
+  //     if (editingId) {
+  //       await updateDoc(doc(db, 'events', editingId), {
+  //         ...eventData,
+  //         updatedAt: Timestamp.now(),
+  //       })
+  //       toast.success('Updated!')
+  //     } else {
+  //       await addDoc(collection(db, 'events'), {
+  //         ...eventData,
+  //         createdAt: Timestamp.now(),
+  //         updatedAt: Timestamp.now(),
+  //       })
+  //       toast.success('Added!')
+  //     }
+
+  //     handleCancel()
+  //     fetchEvents()
+  //   } catch {
+  //     toast.error('Save failed')
+  //   }
+  // }
+
+  // const handleEdit = (event: Event) => {
+  //   setFormData({
+  //     ...event,
+  //     startDate: new Date(event.startDate).toString(),
+  //     endDate: new Date(event.endDate).toString(),
+  //     host: event.host || { name: '', role: '', image: '' },
+  //     speakers: event.speakers || [],
+  //   } as any)
+
+  //   setImagePreview(event.image)
+  //   setEditingId(event.id)
+  //   setShowForm(true)
+  // }
+
+  // const handleDelete = async (id: string) => { 
+  //   if (!window.confirm('Are you sure?')) 
+  //     return 
+  //   try {
+  //      await deleteDoc(doc(db, 'events', id)) 
+  //      toast.success('Event deleted!')
+  //       fetchEvents()
+  //      }
+  //   catch (error) {
+  //     console.error('Error deleting event:', error) 
+  //     toast.error('Failed to delete event') 
+  //   }
+  // }
+
+  // const handleCancel = () => {
+  //   setShowForm(false)
+  //   setEditingId(null)
+  //   setImagePreview(null)
+
+  //   setFormData({
+  //     title: '',
+  //     slug: '',
+  //     description: '',
+  //     location: '',
+  //     startDate: '',
+  //     endDate: '',
+  //     image: '',
+  //     category: '',
+  //     capacity: 0,
+  //     host: { name: '', role: '', image: '' },
+  //     speakers: [],
+  //   })
+  // }
+
+  // // ================= SPEAKERS =================
+  // const addSpeaker = () => {
+  //   setFormData(prev => ({
+  //     ...prev,
+  //     speakers: [...prev.speakers, { name: '', role: '', image: '' }],
+  //   }))
+  // }
+
+  // const updateSpeaker = (i: number, field: string, value: string) => {
+  //   const updated = [...formData.speakers]
+  //   updated[i][field] = value
+
+  //   setFormData(prev => ({ ...prev, speakers: updated }))
+  // }
+
+  // const removeSpeaker = (i: number) => {
+  //   setFormData(prev => ({
+  //     ...prev,
+  //     speakers: prev.speakers.filter((_, index) => index !== i),
+  //   }))
+  // }
+
+
+  //   // ✅ EXPORT CSV
+  // const exportToCSV = () => {
+  //   if (!registrations.length) return
+
+  //   const headers = ['Name', 'Email', 'Phone', 'Department', 'Level']
+  //   const rows = registrations.map(u => [
+  //     u.name,
+  //     u.email,
+  //     u.phone,
+  //     u.department,
+  //     u.level
+  //   ])
+
+  //   const csv =
+  //     [headers, ...rows]
+  //       .map(row => row.join(','))
+  //       .join('\n')
+
+  //   const blob = new Blob([csv], { type: 'text/csv' })
+  //   const url = URL.createObjectURL(blob)
+
+  //   const a = document.createElement('a')
+  //   a.href = url
+  //   a.download = `${selectedEvent?.title}-registrations.csv`
+  //   a.click()
+  // }
+
+  // // ✅ ATTENDANCE SHEET (PRINT)
+  // const downloadAttendance = () => {
+  //   const win = window.open('', '_blank')
+
+  //   if (!win) return
+
+  //   win.document.write(`
+  //     <html>
+  //       <head>
+  //         <title>${selectedEvent?.title} Attendance</title>
+  //       </head>
+  //       <body>
+  //         <h2>${selectedEvent?.title} Attendance Sheet</h2>
+  //         <table border="1" cellpadding="10">
+  //           <tr>
+  //             <th>Name</th>
+  //             <th>Email</th>
+  //             <th>Phone</th>
+  //             <th>Department</th>
+  //             <th>Level</th>
+  //             <th>Signature</th>
+  //           </tr>
+  //           ${registrations.map(u => `
+  //             <tr>
+  //               <td>${u.name}</td>
+  //               <td>${u.email}</td>
+  //               <td>${u.phone}</td>
+  //               <td>${u.department}</td>
+  //               <td>${u.level}</td>
+  //               <td></td>
+  //             </tr>
+  //           `).join('')}
+  //         </table>
+  //       </body>
+  //     </html>
+  //   `)
+
+  //   win.print()
+  // }
+
+  // if (loading) return <Loader className="animate-spin m-auto mt-10" />
+
+
+
+    const [events, setEvents] = useState<Event[]>([])
   const [loading, setLoading] = useState(true)
   const [showForm, setShowForm] = useState(false)
   const [editingId, setEditingId] = useState<string | null>(null)
@@ -42,72 +398,61 @@ export default function AdminEvents() {
     image: '',
     category: '',
     capacity: 0,
-
-    host: {
-      name: '',
-      role: '',
-      image: '',
-    },
-
-    speakers: [] as {
-      name: string
-      role: string
-      image: string
-    }[],
+    host: { name: '', role: '', image: '' },
+    speakers: [] as { name: string; role: string; image: string }[],
   })
 
-  useEffect(() => {
-    fetchEvents()
-  }, [])
-
-  useEffect(() => {
-    if (!search) {
-      setFilteredRegistrations(registrations)
-    } else {
-      const filtered = registrations.filter(user =>
-        user.name?.toLowerCase().includes(search.toLowerCase()) ||
-        user.email?.toLowerCase().includes(search.toLowerCase()) ||
-        user.department?.toLowerCase().includes(search.toLowerCase())
-      )
-      setFilteredRegistrations(filtered)
-    }
-  }, [search, registrations])
-
-  // ================= FETCH =================
+  // ================= FETCH EVENTS =================
   const fetchEvents = async () => {
+    setLoading(true)
     try {
       const eventsQuery = query(collection(db, 'events'), orderBy('startDate', 'asc'))
       const regQuery = query(collection(db, 'event_registrations'))
 
-      const snapshot = await getDocs(eventsQuery)
-      const regSnapshot = await getDocs(regQuery)
+      const [eventSnap, regSnap] = await Promise.all([
+        getDocs(eventsQuery),
+        getDocs(regQuery),
+      ])
 
-      const eventsList = snapshot.docs.map(doc => {
-        const data = doc.data() as any
+      const eventsList: Event[] = eventSnap.docs.map((docSnap) => {
+        const data = docSnap.data() as any
         return {
-          id: doc.id,
+          id: docSnap.id,
           ...data,
           status: getEventStatus(data.startDate, data.endDate),
-        } as Event
-      })
-
-      regSnapshot.docs.forEach(regDoc => {
-        const regData = regDoc.data()
-        const index = eventsList.findIndex(e => e.id === regData.eventId)
-        if (index !== -1) {
-          eventsList[index].registeredCount =
-            (eventsList[index].registeredCount || 0) + 1
         }
       })
 
-      setEvents(eventsList)
-    } catch {
+      // ✅ FIXED COUNT LOGIC
+      const regMap: Record<string, number> = {}
+
+      regSnap.docs.forEach((doc) => {
+        const data = doc.data()
+        const eventId = data.eventId
+
+        if (!regMap[eventId]) regMap[eventId] = 0
+        regMap[eventId]++
+      })
+
+      const finalEvents = eventsList.map((event) => ({
+        ...event,
+        registeredCount: regMap[event.id] || 0,
+      }))
+
+      setEvents(finalEvents)
+    } catch (err) {
+      console.error(err)
       toast.error('Failed to load events')
     } finally {
       setLoading(false)
     }
   }
 
+  useEffect(() => {
+    fetchEvents()
+  }, [])
+
+  // ================= FETCH REGISTRATIONS =================
   const fetchRegistrations = async (eventId: string) => {
     setLoadingRegistrations(true)
     try {
@@ -117,8 +462,8 @@ export default function AdminEvents() {
       )
 
       const snap = await getDocs(q)
-      const data = snap.docs.map(doc => doc.data())
-      
+      const data = snap.docs.map((doc) => doc.data())
+
       setRegistrations(data)
       setFilteredRegistrations(data)
     } catch {
@@ -128,7 +473,21 @@ export default function AdminEvents() {
     }
   }
 
-  // ================= IMAGE UPLOAD (ONE FUNCTION) =================
+  // ================= SEARCH =================
+  useEffect(() => {
+    if (!search) {
+      setFilteredRegistrations(registrations)
+    } else {
+      const filtered = registrations.filter((u) =>
+        u.name?.toLowerCase().includes(search.toLowerCase()) ||
+        u.email?.toLowerCase().includes(search.toLowerCase()) ||
+        u.department?.toLowerCase().includes(search.toLowerCase())
+      )
+      setFilteredRegistrations(filtered)
+    }
+  }, [search, registrations])
+
+  // ================= IMAGE UPLOAD =================
   const handleImageUpload = async (
     file: File,
     type: 'event' | 'host' | 'speaker',
@@ -141,25 +500,21 @@ export default function AdminEvents() {
       const url = await uploadToCloudinary(file)
 
       if (type === 'event') {
-        setFormData(prev => ({ ...prev, image: url }))
+        setFormData((p) => ({ ...p, image: url }))
         setImagePreview(url)
       }
 
       if (type === 'host') {
-        setFormData(prev => ({
-          ...prev,
-          host: { ...prev.host, image: url },
+        setFormData((p) => ({
+          ...p,
+          host: { ...p.host, image: url },
         }))
       }
 
       if (type === 'speaker' && index !== undefined) {
         const updated = [...formData.speakers]
         updated[index].image = url
-
-        setFormData(prev => ({
-          ...prev,
-          speakers: updated,
-        }))
+        setFormData((p) => ({ ...p, speakers: updated }))
       }
 
       toast.success('Image uploaded!')
@@ -175,28 +530,20 @@ export default function AdminEvents() {
     const { name, value } = e.target
 
     if (name === 'title') {
-      setFormData(prev => ({
-        ...prev,
+      setFormData((p) => ({
+        ...p,
         title: value,
         slug: slugify(value),
       }))
     } else if (name === 'capacity') {
-      setFormData(prev => ({ ...prev, capacity: parseInt(value) || 0 }))
+      setFormData((p) => ({ ...p, capacity: parseInt(value) || 0 }))
     } else {
-      setFormData(prev => ({ ...prev, [name]: value }))
+      setFormData((p) => ({ ...p, [name]: value }))
     }
   }
 
   const handleSubmit = async (e: any) => {
     e.preventDefault()
-
-    if (!formData.title || !formData.description || !formData.location) {
-      return toast.error('Fill all required fields')
-    }
-
-    if (new Date(formData.startDate) >= new Date(formData.endDate)) {
-      return toast.error('Invalid date range')
-    }
 
     try {
       const eventData = {
@@ -204,10 +551,6 @@ export default function AdminEvents() {
         slug: formData.slug || slugify(formData.title),
         startDate: Timestamp.fromDate(new Date(formData.startDate)),
         endDate: Timestamp.fromDate(new Date(formData.endDate)),
-        registeredCount:
-          editingId
-            ? events.find(e => e.id === editingId)?.registeredCount || 0
-            : 0,
       }
 
       if (editingId) {
@@ -227,7 +570,8 @@ export default function AdminEvents() {
 
       handleCancel()
       fetchEvents()
-    } catch {
+    } catch (err) {
+      console.error(err)
       toast.error('Save failed')
     }
   }
@@ -235,8 +579,8 @@ export default function AdminEvents() {
   const handleEdit = (event: Event) => {
     setFormData({
       ...event,
-      startDate: new Date(event.startDate).toString(),
-      endDate: new Date(event.endDate).toString(),
+      startDate: new Date(event.startDate).toString().slice(0, 16),
+      endDate: new Date(event.endDate).toString().slice(0, 16),
       host: event.host || { name: '', role: '', image: '' },
       speakers: event.speakers || [],
     } as any)
@@ -246,17 +590,14 @@ export default function AdminEvents() {
     setShowForm(true)
   }
 
-  const handleDelete = async (id: string) => { 
-    if (!window.confirm('Are you sure?')) 
-      return 
+  const handleDelete = async (id: string) => {
+    if (!window.confirm('Delete event?')) return
     try {
-       await deleteDoc(doc(db, 'events', id)) 
-       toast.success('Event deleted!')
-        fetchEvents()
-       }
-    catch (error) {
-      console.error('Error deleting event:', error) 
-      toast.error('Failed to delete event') 
+      await deleteDoc(doc(db, 'events', id))
+      toast.success('Deleted!')
+      fetchEvents()
+    } catch {
+      toast.error('Delete failed')
     }
   }
 
@@ -279,8 +620,7 @@ export default function AdminEvents() {
       speakers: [],
     })
   }
-
-  // ================= SPEAKERS =================
+    // ================= SPEAKERS =================
   const addSpeaker = () => {
     setFormData(prev => ({
       ...prev,
@@ -303,7 +643,7 @@ export default function AdminEvents() {
   }
 
 
-    // ✅ EXPORT CSV
+      // ✅ EXPORT CSV
   const exportToCSV = () => {
     if (!registrations.length) return
 
@@ -370,7 +710,11 @@ export default function AdminEvents() {
     win.print()
   }
 
+
+  // ================= UI =================
   if (loading) return <Loader className="animate-spin m-auto mt-10" />
+
+
 
  return (
   <>
@@ -703,7 +1047,11 @@ export default function AdminEvents() {
                 {filteredRegistrations.map((u, i) => (
                   <tr key={i}>
                     <td>{u.name}</td>
-                    <td>{u.email}</td>
+                    <td>
+                      <Link to={`mailto:${u.email}`} className="text-blue-600 hover:underline">
+                      {u.email}
+                      </Link>
+                      </td>
                     <td>{u.phone}</td>
                     <td>{u.department}</td>
                     <td>{u.level}</td>
