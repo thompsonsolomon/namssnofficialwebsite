@@ -95,26 +95,9 @@ export default function Login() {
           </button>
         </form>
 
-        {/* Footer */}
-        <div className="mt-6 text-center">
-          <p className="text-muted-foreground">
-            Don't have an account?{' '}
-            <Link to="/register" className="text-primary hover:underline font-medium">
-              Create one
-            </Link>
-          </p>
-        </div>
-
-        {/* Demo Info */}
-        <div className="mt-8 card p-4 bg-muted/50">
-          <p className="text-xs text-muted-foreground text-center">
-            <strong>Demo Credentials:</strong>
-            <br />
-            Email: admin@example.com
-            <br />
-            Password: password123
-          </p>
-        </div>
+        
+      
+        
       </div>
     </div>
   )
