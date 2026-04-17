@@ -30,9 +30,9 @@ export const uploadToCloudinary = async (file: File): Promise<string> => {
   }
 }
 
-export async function uploadToUploadcare(file: File): Promise<string> {
-  const publicKey = "11885640b3e12b251886"
-
+export async function uploadToUploadcare(file: File){
+  const publicKey = "a358afa320bfda2e4b25"
+// 11885640b3e12b251886
   if (!file) throw new Error("No file provided")
 
   const url = "https://upload.uploadcare.com/base/"
@@ -42,6 +42,7 @@ export async function uploadToUploadcare(file: File): Promise<string> {
   formData.append("UPLOADCARE_STORE", "1")
   formData.append("file", file)
 
+  console.log("Uploading file to Uploadcare:", file)
   try {
     const response = await fetch(url, {
       method: "POST",
@@ -57,6 +58,7 @@ export async function uploadToUploadcare(file: File): Promise<string> {
     }
 
     const data = await response.json()
+    console.log("Uploadcare response data:", data)
 
     if (!data.file) {
       throw new Error("No file UUID returned from Uploadcare")
